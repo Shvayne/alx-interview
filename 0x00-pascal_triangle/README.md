@@ -1,0 +1,1 @@
+This directory contains code that generates a list of integers representing the pascal triangle of n
