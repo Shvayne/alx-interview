@@ -1,0 +1,1 @@
+This repo contains a file that calculates the fewest number of operations needed to result in n * H characters
