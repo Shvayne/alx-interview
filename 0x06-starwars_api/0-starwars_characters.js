@@ -10,7 +10,7 @@ if (!movieId) {
 
 const url = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
 
-request.get(url, (error, _response, body) => {
+request.get(url, async (error, _response, body) => {
   if (error) {
     console.error('Error fetching movie data:', error);
     return;
@@ -24,15 +24,25 @@ request.get(url, (error, _response, body) => {
     return;
   }
 
-  characters.forEach((characterUrl) => {
-    request(characterUrl, (error, _response, body) => {
-      if (error) {
-        console.error('Error fetching character data:', error);
-        return;
-      }
+  // Use a for loop with await to fetch character names in order
+  for (const characterUrl of characters) {
+    try {
+      const characterData = await fetchCharacter(characterUrl);
+      console.log(characterData.name);
+    } catch (err) {
+      console.error('Error fetching character data:', err);
+    }
+  }
+});
 
+function fetchCharacter(url) {
+  return new Promise((resolve, reject) => {
+    request.get(url, (error, _response, body) => {
+      if (error) {
+        return reject(error);
+      }
       const character = JSON.parse(body);
-      console.log(character.name);
+      resolve(character);
     });
   });
-});
+}
