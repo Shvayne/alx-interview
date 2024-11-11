@@ -10,7 +10,7 @@ if (!movieId) {
 
 const url = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
 
-request.get(url, (error, response, body) => {
+request.get(url, (error, _response, body) => {
   if (error) {
     console.error('Error fetching movie data:', error);
     return;
@@ -25,7 +25,7 @@ request.get(url, (error, response, body) => {
   }
 
   characters.forEach((characterUrl) => {
-    request(characterUrl, (error, response, body) => {
+    request(characterUrl, (error, _response, body) => {
       if (error) {
         console.error('Error fetching character data:', error);
         return;
